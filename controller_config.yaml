@@ -1,0 +1,176 @@
+# vim: ft=yaml.ansible
+---
+aap_organizations:
+  - name: Portworx DR Demo
+    galaxy_credentials: Ansible Galaxy
+
+controller_settings:
+  - name: AWX_COLLECTIONS_ENABLED
+    value: true
+
+  - name: AWX_ROLES_ENABLED
+    value: true
+
+controller_projects:
+  - name: Demo Project
+    state: absent
+
+  - name: Portworx DR
+    organization: Portworx DR Demo
+    scm_branch: main
+    scm_clean: "no"
+    scm_delete_on_update: "no"
+    scm_type: git
+    scm_update_on_launch: "yes"
+    scm_url: https://github.com/dminnear-rh/rhvp.portworx.git
+    wait: true
+    update_project: true
+
+controller_inventories: {}
+
+controller_inventory_sources: {}
+
+controller_templates:
+  - name: Demo Job Template
+    state: absent
+
+  - name: Open Worker Ports
+    organization: Portworx DR Demo
+    project: Portworx DR
+    job_type: run
+    playbook: playbooks/open-worker-ports.yml
+    credentials:
+      - aws-creds
+      - kubeconfigs
+    execution_environment: Default execution environment
+
+controller_schedules: []
+
+controller_credential_types:
+  - name: AWSCredential
+    description: AWS Credentials for managing AWS resources
+    kind: cloud
+    inputs:
+      fields:
+        - id: aws_access_key_id
+          type: string
+          label: AWS Access Key ID
+          secret: true
+        - id: aws_secret_access_key
+          type: string
+          label: AWS Secret Access Key
+          secret: true
+      required:
+        - aws_access_key_id
+        - aws_secret_access_key
+    injectors:
+      extra_vars:
+        aws_access_key_id: "{{ aws_access_key_id }}"
+        aws_secret_access_key: "{{ aws_secret_access_key }}"
+
+  - name: PortworxSaaSLicense
+    description: Portworx SaaS Licenses for enabling DR and other features
+    kind: cloud
+    inputs:
+      fields:
+        - id: dr_license
+          type: string
+          label: Portworx SaaS License Enabling the DR Feature
+          secret: true
+      required:
+        - dr_license
+    injectors:
+      extra_vars:
+        dr_license: "{{ dr_license }}"
+
+  - name: Kubeconfig
+    description: Kubeconfigs for primary and secondary clusters
+    kind: cloud
+    inputs:
+      fields:
+        - id: primary_kubeconfig
+          type: string
+          label: Kubeconfig for the Primary Cluster
+          secret: true
+        - id: secondary_kubeconfig
+          type: string
+          label: Kubeconfig for the Secondary Cluster
+          secret: true
+      required:
+        - primary_kubeconfig
+        - secondary_kubeconfig
+    injectors:
+      extra_vars:
+        primary_kubeconfig: "{{ primary_kubeconfig }}"
+        secondary_kubeconfig: "{{ secondary_kubeconfig }}"
+
+controller_credential_input_sources:
+  - source_credential: Hashivault
+    target_credential: aws-creds
+    input_field_name: aws_access_key_id
+    metadata:
+      secret_backend: secret
+      secret_path: global/aws-creds
+      secret_key: aws_access_key_id
+
+  - source_credential: Hashivault
+    target_credential: aws-creds
+    input_field_name: aws_secret_access_key
+    metadata:
+      secret_backend: secret
+      secret_path: global/aws-creds
+      secret_key: aws_secret_access_key
+
+  - source_credential: Hashivault
+    target_credential: portworx
+    input_field_name: dr_license
+    metadata:
+      secret_backend: secret
+      secret_path: global/portworx
+      secret_key: dr_license
+
+  - source_credential: Hashivault
+    target_credential: kubeconfigs
+    input_field_name: primary_kubeconfig
+    metadata:
+      secret_backend: secret
+      secret_path: global/kubeconfigs
+      secret_key: primary_kubeconfig
+
+  - source_credential: Hashivault
+    target_credential: kubeconfigs
+    input_field_name: secondary_kubeconfig
+    metadata:
+      secret_backend: secret
+      secret_path: global/kubeconfigs
+      secret_key: secondary_kubeconfig
+
+controller_credentials:
+  - name: Hashivault
+    description: In-Cluster Hashicorp vault lookup
+    organization: Portworx DR Demo
+    credential_type: HashiCorp Vault Secret Lookup
+    inputs:
+      url: "{{ secrets['vault_url'] }}"
+      token: "{{ secrets['vault_root_token'] }}"
+      cacert: "{{ secrets['vault_ca'] }}"
+      api_version: v2
+
+  - name: aws-creds
+    description: AWS Credentials for managing Security Groups, S3 buckets, and other AWS resources
+    organization: Portworx DR Demo
+    credential_type: AWSCredential
+
+  - name: portworx
+    description: Portworx SaaS license for enabling enterprise and DR features
+    organization: Portworx DR Demo
+    credential_type: PortworxSaaSLicense
+
+  - name: kubeconfigs
+    description: Kubeconfigs for primary and secondary clusters
+    organization: Portworx DR Demo
+    credential_type: Kubeconfig
+
+controller_launch_jobs: []
+
+controller_execution_environments: []

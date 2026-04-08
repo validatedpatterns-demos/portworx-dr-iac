@@ -26,9 +26,29 @@ controller_projects:
     wait: true
     update_project: true
 
-controller_inventories: []
+  - name: Localhost Inventory
+    organization: Portworx DR Demo
+    scm_branch: main
+    scm_clean: "no"
+    scm_delete_on_update: "no"
+    scm_type: git
+    scm_update_on_launch: "yes"
+    scm_url: https://github.com/dminnear-rh/localhost-inventory.git
+    wait: true
+    update_project: true
 
-controller_inventory_sources: []
+controller_inventories:
+  - name: Portworx DR Demo Inventory
+    organization: Portworx DR Demo
+
+controller_inventory_sources:
+  - name: Portworx DR Demo Static Inventory
+    inventory: Portworx DR Demo Inventory
+    organization: Portworx DR Demo
+    source: scm
+    source_project: Localhost Inventory
+    source_path: inventory
+    update_on_launch: true
 
 controller_templates:
   - name: Demo Job Template

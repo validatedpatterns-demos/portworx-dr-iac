@@ -65,8 +65,8 @@ controller_credential_types:
         - aws_secret_access_key
     injectors:
       extra_vars:
-        aws_access_key_id: "{{ aws_access_key_id }}"
-        aws_secret_access_key: "{{ aws_secret_access_key }}"
+        aws_access_key_id: "{  { aws_access_key_id }}"
+        aws_secret_access_key: "{  { aws_secret_access_key }}"
 
   - name: PortworxSaaSLicense
     description: Portworx SaaS Licenses for enabling DR and other features
@@ -81,7 +81,7 @@ controller_credential_types:
         - dr_license
     injectors:
       extra_vars:
-        dr_license: "{{ dr_license }}"
+        dr_license: "{  { dr_license }}"
 
   - name: Kubeconfig
     description: Kubeconfigs for primary and secondary clusters
@@ -101,8 +101,8 @@ controller_credential_types:
         - secondary_kubeconfig
     injectors:
       extra_vars:
-        primary_kubeconfig: "{{ primary_kubeconfig }}"
-        secondary_kubeconfig: "{{ secondary_kubeconfig }}"
+        primary_kubeconfig: "{  { primary_kubeconfig }}"
+        secondary_kubeconfig: "{  { secondary_kubeconfig }}"
 
 controller_credential_input_sources:
   - source_credential: Hashivault

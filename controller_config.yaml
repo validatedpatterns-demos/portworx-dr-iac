@@ -26,9 +26,9 @@ controller_projects:
     wait: true
     update_project: true
 
-controller_inventories: {}
+controller_inventories: []
 
-controller_inventory_sources: {}
+controller_inventory_sources: []
 
 controller_templates:
   - name: Demo Job Template

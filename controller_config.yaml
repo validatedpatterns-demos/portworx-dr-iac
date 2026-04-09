@@ -54,11 +54,11 @@ controller_templates:
   - name: Demo Job Template
     state: absent
 
-  - name: Open Worker Ports
+  - name: Establish Portworx Disaster Recovery Pair
     organization: Portworx DR Demo
     project: Portworx DR
     job_type: run
-    playbook: playbooks/open-worker-ports.yml
+    playbook: playbooks/create-clusterpair.yml
     credentials:
       - aws-creds
       - kubeconfigs
@@ -191,6 +191,15 @@ controller_credentials:
     organization: Portworx DR Demo
     credential_type: Kubeconfig
 
-controller_launch_jobs: []
+controller_launch_jobs:
+  - name: Open Worker Ports
+    organization: Portworx DR Demo
+    project: Portworx DR
+    job_type: run
+    playbook: playbooks/open-worker-ports.yml
+    credentials:
+      - aws-creds
+      - kubeconfigs
+    execution_environment: Default execution environment
 
 controller_execution_environments: []

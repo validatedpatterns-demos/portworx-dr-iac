@@ -63,7 +63,7 @@ controller_templates:
     credentials:
       - aws-creds
       - kubeconfigs
-    execution_environment: Default execution environment
+    execution_environment: Portworx EE
 
   - name: Open Worker Ports
     organization: Portworx DR Demo
@@ -74,7 +74,17 @@ controller_templates:
     credentials:
       - aws-creds
       - kubeconfigs
-    execution_environment: Default execution environment
+    execution_environment: Portworx EE
+
+  - name: Create Migration Schedule
+    organization: Portworx DR Demo
+    project: Portworx DR
+    inventory: Portworx DR Demo Inventory
+    job_type: run
+    playbook: playbooks/create-migration-schedule.yml
+    credentials:
+      - kubeconfigs
+    execution_environment: Portworx EE
 
 controller_schedules: []
 
@@ -206,4 +216,6 @@ controller_credentials:
 controller_launch_jobs:
   - name: Open Worker Ports
 
-controller_execution_environments: []
+controller_execution_environments:
+  - name: Portworx EE
+    image: quay.io/dminnear/portworx-ee:latest

@@ -205,14 +205,5 @@ controller_credentials:
 
 controller_launch_jobs:
   - name: Open Worker Ports
-    organization: Portworx DR Demo
-    project: Portworx DR
-    inventory: Portworx DR Demo Inventory
-    job_type: run
-    playbook: playbooks/open-worker-ports.yml
-    credentials:
-      - aws-creds
-      - kubeconfigs
-    execution_environment: Default execution environment
 
 controller_execution_environments: []

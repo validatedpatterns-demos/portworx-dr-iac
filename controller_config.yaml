@@ -65,12 +65,12 @@ controller_templates:
       - kubeconfigs
     execution_environment: Portworx EE
 
-  - name: Open Worker Ports
+  - name: Configure AWS for Portworx
     organization: Portworx DR Demo
     project: Portworx DR
     inventory: Portworx DR Demo Inventory
     job_type: run
-    playbook: playbooks/open-worker-ports.yml
+    playbook: playbooks/configure-aws-portworx.yml
     credentials:
       - aws-creds
       - kubeconfigs
@@ -214,7 +214,7 @@ controller_credentials:
     credential_type: Kubeconfig
 
 controller_launch_jobs:
-  - name: Open Worker Ports
+  - name: Configure AWS for Portworx
 
 controller_execution_environments:
   - name: Portworx EE

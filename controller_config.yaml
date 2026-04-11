@@ -59,7 +59,7 @@ controller_templates:
     project: Portworx DR
     inventory: Portworx DR Demo Inventory
     job_type: run
-    playbook: playbooks/create-clusterpair.yml
+    playbook: playbooks/create-cluster-pair.yml
     credentials:
       - aws-creds
       - kubeconfigs
@@ -94,6 +94,17 @@ controller_templates:
     job_type: run
     playbook: playbooks/create-migration-schedule.yml
     credentials:
+      - kubeconfigs
+    execution_environment: Portworx EE
+
+  - name: Run DR Bubble Test
+    organization: Portworx DR Demo
+    project: Portworx DR
+    inventory: Portworx DR Demo Inventory
+    job_type: run
+    playbook: playbooks/bubble-test.yml
+    credentials:
+      - aws-creds
       - kubeconfigs
     execution_environment: Portworx EE
 

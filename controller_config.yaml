@@ -114,7 +114,6 @@ controller_templates:
     job_type: run
     playbook: playbooks/bubble-test.yml
     credentials:
-      - aws-creds
       - kubeconfigs
     execution_environment: Portworx EE
 
@@ -125,7 +124,6 @@ controller_templates:
     job_type: run
     playbook: playbooks/bubble-test-teardown.yml
     credentials:
-      - aws-creds
       - kubeconfigs
     execution_environment: Portworx EE
 

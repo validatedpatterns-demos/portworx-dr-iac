@@ -97,6 +97,16 @@ controller_templates:
       - kubeconfigs
     execution_environment: Portworx EE
 
+  - name: Import Spoke Cluster to ACM
+    organization: Portworx DR Demo
+    project: Portworx DR
+    inventory: Portworx DR Demo Inventory
+    job_type: run
+    playbook: playbooks/import-spoke-cluster.yml
+    credentials:
+      - kubeconfigs
+    execution_environment: Portworx EE
+
   - name: Run DR Bubble Test
     organization: Portworx DR Demo
     project: Portworx DR
@@ -108,7 +118,31 @@ controller_templates:
       - kubeconfigs
     execution_environment: Portworx EE
 
-controller_schedules: []
+controller_schedules:
+  - name: Configure AWS for Portworx
+    organization: Portworx DR Demo
+    unified_job_template: Configure AWS for Portworx
+    rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
+
+  - name: Activate Portworx DR License
+    organization: Portworx DR Demo
+    unified_job_template: Activate Portworx DR License
+    rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
+
+  - name: Import Spoke Cluster to ACM
+    organization: Portworx DR Demo
+    unified_job_template: Import Spoke Cluster to ACM
+    rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
+
+  - name: Establish Portworx Disaster Recovery Pair
+    organization: Portworx DR Demo
+    unified_job_template: Establish Portworx Disaster Recovery Pair
+    rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
+
+  - name: Create Migration Schedule
+    organization: Portworx DR Demo
+    unified_job_template: Create Migration Schedule
+    rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
 
 controller_credential_types:
   - name: AWSCredential
@@ -235,8 +269,7 @@ controller_credentials:
     organization: Portworx DR Demo
     credential_type: Kubeconfig
 
-controller_launch_jobs:
-  - name: Configure AWS for Portworx
+controller_launch_jobs: []
 
 controller_execution_environments:
   - name: Portworx EE

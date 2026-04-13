@@ -22,7 +22,7 @@ controller_projects:
     scm_delete_on_update: "no"
     scm_type: git
     scm_update_on_launch: "yes"
-    scm_url: https://github.com/dminnear-rh/rhvp.portworx.git
+    scm_url: https://github.com/validatedpatterns-demos/rhvp.portworx.git
     wait: true
     update_project: true
 
@@ -33,7 +33,7 @@ controller_projects:
     scm_delete_on_update: "no"
     scm_type: git
     scm_update_on_launch: "yes"
-    scm_url: https://github.com/dminnear-rh/localhost-inventory.git
+    scm_url: https://github.com/validatedpatterns-demos/localhost-inventory.git
     wait: true
     update_project: true
 

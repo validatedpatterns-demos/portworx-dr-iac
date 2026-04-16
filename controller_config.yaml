@@ -54,7 +54,18 @@ controller_templates:
   - name: Demo Job Template
     state: absent
 
-  - name: Establish Portworx Disaster Recovery Pair
+  - name: Create Admin Cluster Pair
+    organization: Portworx DR Demo
+    project: Portworx DR
+    inventory: Portworx DR Demo Inventory
+    job_type: run
+    playbook: playbooks/create-admin-cluster-pair.yml
+    credentials:
+      - aws-creds
+      - kubeconfigs
+    execution_environment: Portworx EE
+
+  - name: Create Cluster Pair
     organization: Portworx DR Demo
     project: Portworx DR
     inventory: Portworx DR Demo Inventory
@@ -65,7 +76,7 @@ controller_templates:
       - kubeconfigs
     execution_environment: Portworx EE
 
-  - name: Configure AWS for Portworx
+  - name: Configure AWS
     organization: Portworx DR Demo
     project: Portworx DR
     inventory: Portworx DR Demo Inventory
@@ -85,6 +96,16 @@ controller_templates:
     credentials:
       - kubeconfigs
       - portworx
+    execution_environment: Portworx EE
+
+  - name: Create Migration
+    organization: Portworx DR Demo
+    project: Portworx DR
+    inventory: Portworx DR Demo Inventory
+    job_type: run
+    playbook: playbooks/create-migration.yml
+    credentials:
+      - kubeconfigs
     execution_environment: Portworx EE
 
   - name: Create Migration Schedule
@@ -128,9 +149,9 @@ controller_templates:
     execution_environment: Portworx EE
 
 controller_schedules:
-  - name: Configure AWS for Portworx
+  - name: Configure AWS
     organization: Portworx DR Demo
-    unified_job_template: Configure AWS for Portworx
+    unified_job_template: Configure AWS
     rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
 
   - name: Activate Portworx DR License
@@ -143,9 +164,9 @@ controller_schedules:
     unified_job_template: Import Spoke Cluster to ACM
     rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
 
-  - name: Establish Portworx Disaster Recovery Pair
+  - name: Create Admin Cluster Pair
     organization: Portworx DR Demo
-    unified_job_template: Establish Portworx Disaster Recovery Pair
+    unified_job_template: Create Admin Cluster Pair
     rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
 
   - name: Create Migration Schedule

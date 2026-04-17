@@ -76,17 +76,6 @@ controller_templates:
       - kubeconfigs
     execution_environment: Portworx EE
 
-  - name: Configure AWS
-    organization: Portworx DR Demo
-    project: Portworx DR
-    inventory: Portworx DR Demo Inventory
-    job_type: run
-    playbook: playbooks/configure-aws-portworx.yml
-    credentials:
-      - aws-creds
-      - kubeconfigs
-    execution_environment: Portworx EE
-
   - name: Activate Portworx DR License
     organization: Portworx DR Demo
     project: Portworx DR
@@ -182,11 +171,6 @@ controller_templates:
     execution_environment: Portworx EE
 
 controller_schedules:
-  - name: Configure AWS
-    organization: Portworx DR Demo
-    unified_job_template: Configure AWS
-    rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
-
   - name: Activate Portworx DR License
     organization: Portworx DR Demo
     unified_job_template: Activate Portworx DR License

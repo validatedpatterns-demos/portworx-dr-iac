@@ -126,6 +126,7 @@ controller_templates:
           required: true
           type: text
           variable: migration_name
+          default: boutique-migration-from-survey
         - question_name: Are you using an admin cluster pair?
           required: true
           type: multiplechoice

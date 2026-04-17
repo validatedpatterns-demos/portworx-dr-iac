@@ -131,7 +131,7 @@ controller_templates:
           required: true
           type: multiplechoice
           variable: use_admin_cluster_pair
-          default: yes
+          default: "yes"
           choices: |
             yes
             no

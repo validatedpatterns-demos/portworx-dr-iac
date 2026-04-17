@@ -107,6 +107,38 @@ controller_templates:
     credentials:
       - kubeconfigs
     execution_environment: Portworx EE
+    survey_enabled: true
+    survey:
+      name: Create Migration Survey
+      description: Create a migration with user input
+      spec:
+        - question_name: Which namespace is Portworx installed in?
+          required: true
+          type: text
+          variable: portworx_namespace
+          default: portworx
+        - question_name: Which namespace do you want to migrate?
+          required: true
+          type: text
+          variable: dr_namespace
+          default: boutique
+        - question_name: What do you want the migration to be named inside of your cluster?
+          required: true
+          type: text
+          variable: migration_name
+        - question_name: Are you using an admin cluster pair?
+          required: true
+          type: multiplechoice
+          variable: use_admin_cluster_pair
+          default: yes
+          choices: |
+            yes
+            no
+        - question_name: What is the name of the cluster pair you are using?
+          required: true
+          type: text
+          variable: cluster_pair
+          default: admin-cluster-pair
 
   - name: Create Migration Schedule
     organization: Portworx DR Demo

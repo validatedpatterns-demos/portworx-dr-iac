@@ -17,7 +17,7 @@ controller_projects:
 
   - name: Portworx DR
     organization: Portworx DR Demo
-    scm_branch: main
+    scm_branch: hypershift-install
     scm_clean: "no"
     scm_delete_on_update: "no"
     scm_type: git

@@ -181,15 +181,15 @@ controller_schedules:
     unified_job_template: Import Spoke Cluster to ACM
     rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
 
-  # - name: Create Admin Cluster Pair
-  #   organization: Portworx DR Demo
-  #   unified_job_template: Create Admin Cluster Pair
-  #   rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
+  - name: Create Admin Cluster Pair
+    organization: Portworx DR Demo
+    unified_job_template: Create Admin Cluster Pair
+    rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
 
-  # - name: Create Migration Schedule
-  #   organization: Portworx DR Demo
-  #   unified_job_template: Create Migration Schedule
-  #   rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
+  - name: Create Migration Schedule
+    organization: Portworx DR Demo
+    unified_job_template: Create Migration Schedule
+    rrule: DTSTART:20191219T130500Z RRULE:FREQ=MINUTELY;INTERVAL=5
 
 controller_credential_types:
   - name: AWSCredential
